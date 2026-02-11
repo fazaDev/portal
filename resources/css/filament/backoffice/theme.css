@@ -1,0 +1,100 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+:root {
+    --primary-500: 0 51 102;
+    /* #003366 */
+    --secondary-500: 255 215 0;
+    /* #FFD700 */
+
+    --success-500: 16 185 129;
+    /* #10B981 */
+    --danger-500: 239 68 68;
+    /* #EF4444 */
+    --warning-500: 245 158 11;
+    /* #F59E0B */
+    --info-500: 59 130 246;
+    /* #3B82F6 */
+}
+
+.dark {
+    --primary-500: 0 51 102;
+    --secondary-500: 255 215 0;
+}
+
+.fi-btn-primary {
+    background-color: rgb(var(--primary-500));
+    color: white;
+}
+
+.fi-btn-primary:hover {
+    background-color: rgb(var(--primary-500) / 0.9);
+}
+
+.fi-btn-secondary {
+    background-color: rgb(var(--secondary-500));
+    color: black;
+}
+
+.fi-btn-secondary:hover {
+    background-color: rgb(var(--secondary-500) / 0.85);
+}
+
+.fi-btn-success {
+    background-color: rgb(var(--success-500));
+}
+
+.fi-btn-danger {
+    background-color: rgb(var(--danger-500));
+}
+
+.fi-btn-warning {
+    background-color: rgb(var(--warning-500));
+    color: black;
+}
+
+.fi-btn-info {
+    background-color: rgb(var(--info-500));
+}
+
+.fi-btn[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.fi-notification {
+    background-color: rgb(var(--panel-background, 255 255 255));
+    color: rgb(var(--text-primary, 15 23 42));
+    border-left: 4px solid rgb(var(--primary-500));
+}
+
+.fi-notification-success {
+    border-left-color: rgb(var(--success-500));
+}
+
+.fi-notification-danger {
+    border-left-color: rgb(var(--danger-500));
+}
+
+.fi-notification-warning {
+    border-left-color: rgb(var(--warning-500));
+}
+
+.fi-notification-info {
+    border-left-color: rgb(var(--info-500));
+}
+
+.fi-notification-title {
+    font-weight: 600;
+}
+
+.fi-notification-icon {
+    color: currentColor;
+}
+
+.fi-btn:focus-visible {
+    outline: 2px solid rgb(var(--secondary-500));
+    outline-offset: 2px;
+}

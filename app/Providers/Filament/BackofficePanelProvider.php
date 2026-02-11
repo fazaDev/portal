@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Providers\Filament;
+
+use Filament\Panel;
+use Filament\PanelProvider;
+use Filament\Pages\Dashboard;
+use Filament\Support\Assets\Css;
+use Filament\Support\Enums\Width;
+// use Filament\Support\Colors\Color;
+use Filament\Widgets\AccountWidget;
+use Filament\Support\Icons\Heroicon;
+use Filament\Navigation\NavigationGroup;
+use Filament\Widgets\FilamentInfoWidget;
+use Openplain\FilamentShadcnTheme\Color;
+use Filament\Http\Middleware\Authenticate;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Filament\Http\Middleware\AuthenticateSession;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+
+class BackofficePanelProvider extends PanelProvider
+{
+    public function panel(Panel $panel): Panel
+    {
+        return $panel
+            ->default()
+            ->id('backoffice')
+            ->path('backoffice')
+            // ->darkMode()
+            // ->viteTheme('resources/css/filament/backoffice/theme.css')
+            ->login()
+            ->colors([
+                'primary' => Color::Default,
+            ])
+            // ->navigationGroups([
+            //     NavigationGroup::make()
+            //         ->label('Konten')
+            //         ->icon(Heroicon::OutlinedShoppingCart),
+            //     NavigationGroup::make()
+            //         ->label('Galeri')
+            //         ->icon(Heroicon::OutlinedPencil),
+            //     NavigationGroup::make()
+            //         ->label('Pengaturan')
+            //         ->icon(Heroicon::OutlinedCog6Tooth)
+            //         ->collapsed(),
+            // ])
+            ->sidebarWidth('18rem')
+            ->sidebarCollapsibleOnDesktop()
+            ->maxContentWidth(Width::Full)
+            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
+            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->pages([
+                Dashboard::class,
+            ])
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->widgets([
+                AccountWidget::class,
+                FilamentInfoWidget::class,
+            ])
+            ->middleware([
+                EncryptCookies::class,
+                AddQueuedCookiesToResponse::class,
+                StartSession::class,
+                AuthenticateSession::class,
+                ShareErrorsFromSession::class,
+                VerifyCsrfToken::class,
+                SubstituteBindings::class,
+                DisableBladeIconComponents::class,
+                DispatchServingFilamentEvent::class,
+            ])
+            ->authMiddleware([
+                Authenticate::class,
+            ]);
+    }
+}
