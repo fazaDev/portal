@@ -13,7 +13,6 @@ return new class extends Migration {
         Schema::create('hero_sliders', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable(); // Judul Overlay pada gambar
-            $table->string('title_2')->nullable(); // Judul Overlay pada gambar
             $table->string('subtitle')->nullable(); // Subtitle / Deskripsi singkat
             $table->string('image'); // Path gambar slider
             $table->string('link')->nullable(); // Link jika slider diklik (misal ke berita tertentu)

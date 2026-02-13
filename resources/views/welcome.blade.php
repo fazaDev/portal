@@ -36,7 +36,10 @@
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="hidden md:flex gap-4">
                 <span><i class="fas fa-phone-alt mr-1"></i> (0741) 446720, 446726, 41225, 445115</span>
-                <span><i class="fas fa-envelope mr-1"></i> dputr@jambiprov.go.id</span>
+                <span>
+                    <i class="fas fa-envelope mr-1"></i> <a href="mailto:dputr@jambiprov.go.id"
+                        class="hover:text-putr-yellow transition">dputr@jambiprov.go.id</a>
+                </span>
             </div>
             <div class="flex gap-3">
                 <a href="#" class="hover:text-putr-yellow transition"><i class="fab fa-facebook-f"></i></a>
@@ -172,12 +175,20 @@
                 <div
                     class="absolute inset-0 bg-gradient-to-r from-putr-blue-dark/90 to-putr-blue-dark/30 flex items-center">
                     <div class="container mx-auto px-4 text-white">
-                        <h2 class="text-4xl md:text-6xl font-bold mb-6 max-w-2xl leading-tight">{{ $hero->title }}
-                            <span class="text-putr-yellow">{{ $hero->subtitle }}</span>
+                        @php
+                            $words = explode(' ', trim($hero->title));
+                            $count = count($words);
+
+                            $yellowCount = $count > 6 ? 3 : 2;
+
+                            $lastPart = implode(' ', array_slice($words, -$yellowCount));
+                            $firstPart = implode(' ', array_slice($words, 0, -$yellowCount));
+                        @endphp
+                        <h2 class="text-3xl md:text-5xl font-bold mb-6 max-w-2xl leading-tight">{{ $firstPart }}
+                            <span class="text-putr-yellow"> {!! $lastPart !!}</span>
                         </h2>
-                        <p class="text-lg md:text-xl mb-8 max-w-xl text-gray-200">Mewujudkan konektivitas wilayah yang
-                            merata demi kesejahteraan masyarakat Provinsi Jambi.</p>
-                        <a href="#"
+                        <p class="text-lg md:text-xl mb-8 max-w-xl text-gray-200">{{ $hero->subtitle }}</p>
+                        <a href="{{ $hero->link }}"
                             class="inline-block bg-putr-yellow text-putr-blue-dark font-bold py-3 px-8 rounded hover:bg-putr-yellow-dark transition shadow-lg">{{ $hero->button_text }}</a>
                     </div>
                 </div>
@@ -272,7 +283,8 @@
                     <h2
                         class="text-2xl font-bold text-putr-blue border-l-4 border-putr-yellow pl-3 dark:text-putr-yellow">
                         Berita Terkini</h2>
-                    <a href="#" class="text-sm text-putr-blue font-medium hover:underline">Lihat Semua &rarr;</a>
+                    <a href="{{ route('berita') }}" class="text-sm text-putr-blue font-medium hover:underline">Lihat
+                        Semua &rarr;</a>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -318,7 +330,7 @@
                         </div>
                     </div>
                     <!-- News Card 3 -->
-                    <div
+                    <!-- <div
                         class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group dark:bg-putr-blue">
                         <div class="h-48 overflow-hidden">
                             <img src="https://placehold.co/600x400?text=Jalan+Suak+Kandis" alt="News"
@@ -337,9 +349,9 @@
                                 melalui Dinas PU-TR memastikan pengecoran jalan sepanjang 15 KM akan selesai sebelum
                                 akhir tahun...</p>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- News Card 4 -->
-                    <div
+                    <!-- <div
                         class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group dark:bg-putr-blue">
                         <div class="h-48 overflow-hidden">
                             <img src="https://placehold.co/600x400?text=Jembatan+Kelok+Sago" alt="News"
@@ -357,7 +369,7 @@
                             <p class="text-gray-600 text-sm line-clamp-3 dark:text-gray-400">Untuk mengantisipasi banjir
                                 tahunan, tim teknis sedang melakukan survei mendalam terhadap kondisi sedimentasi...</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
