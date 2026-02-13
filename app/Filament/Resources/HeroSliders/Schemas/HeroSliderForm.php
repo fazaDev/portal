@@ -22,7 +22,7 @@ class HeroSliderForm
                         TextInput::make('button_text'),
                     ])
                     ->columns(1),
-                
+
                 Section::make('Gambar dan Status')
                     ->schema([
                         FileUpload::make('image')
@@ -31,6 +31,7 @@ class HeroSliderForm
                             ->directory('hero-sliders/images')
                             ->optimize('webp')
                             ->resize(50)
+                            ->imageEditor()
                             ->visibility('public')
                             ->disk('public'),
                         Toggle::make('is_active')
@@ -40,7 +41,7 @@ class HeroSliderForm
                             ->numeric()
                             ->default(0),
                     ])
-                    ->columns(1),   
-            ]); 
+                    ->columns(1),
+            ]);
     }
 }

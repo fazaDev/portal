@@ -9,10 +9,10 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
-    --color-putr-blue: #003366;
-    --color-putr-blue-dark: #002244;
-    --color-putr-yellow: #FFD700;
-    --color-putr-yellow-dark: #E6C300;
+    --color-putr-blue: oklch(0.33 0.07 250);
+    --color-putr-blue-dark: oklch(0.25 0.06 250);
+    --color-putr-yellow: oklch(0.87 0.17 85);
+    --color-putr-yellow-dark: oklch(0.82 0.16 85);
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -35,4 +35,14 @@
 
 .animate-marquee:hover {
     animation-play-state: paused;
+}
+
+/* Hero Slide - ensure proper display */
+.hero-slide {
+    will-change: opacity;
+    backface-visibility: hidden;
+}
+
+.hero-slide.active {
+    z-index: 1;
 }

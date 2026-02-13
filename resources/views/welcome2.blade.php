@@ -1,32 +1,204 @@
-@extends('frontend.layouts.app')
+<!DOCTYPE html>
+<html lang="id">
 
-@section('title', 'Dinas Pekerjaan Umum dan Tata Ruang Provinsi Jambi')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinas Pekerjaan Umum dan Tata Ruang Provinsi Jambi</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // Check for saved dark mode preference
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
 
-@section('content')
-    <!-- HERO SLIDER -->
-    <div class="relative h-[700px] md:h-[550px] bg-black overflow-hidden">
-        <!-- Slide 1 -->
-        <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-100 active" style="background-image: url('{{ asset('storage/hero-sliders/images/01KH59X7AGCG3R3EZ3DQPT0PJR.webp') }}');">
-            <div class="absolute inset-0 bg-gradient-to-r from-putr-blue-dark/90 to-putr-blue-dark/30 flex items-center">
-                <div class="container mx-auto px-4 text-white">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-4 max-w-2xl leading-tight">Pembangunan Infrastruktur <span class="text-putr-yellow">Jambi</span></h2>
-                    <p class="text-lg mb-6 max-w-xl text-gray-200">Mewujudkan konektivitas wilayah yang merata demi kesejahteraan masyarakat Provinsi Jambi.</p>
-                    <a href="#" class="inline-block bg-putr-yellow text-putr-blue-dark font-bold py-3 px-8 rounded hover:bg-putr-yellow-dark transition shadow-lg">Pelajari Selengkapnya</a>
-                </div>
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="font-sans text-gray-800 bg-gray-50 dark:bg-putr-blue-dark dark:text-gray-200 transition-colors duration-300">
+
+    <!-- TOP BAR -->
+    <div class="bg-putr-blue-dark text-white text-xs py-2">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="hidden md:flex gap-4">
+                <span><i class="fas fa-phone-alt mr-1"></i> (0741) 446720, 446726, 41225, 445115</span>
+                <span><i class="fas fa-envelope mr-1"></i> dputr@jambiprov.go.id</span>
             </div>
-        </div>
-        <!-- Slide 2 -->
-        <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: url('{{ asset('storage/hero-sliders/images/01KH5DQYJKQYNS51ZXP64RJKZ2.webp') }}');">
-            <div class="absolute inset-0 bg-gradient-to-r from-putr-blue-dark/90 to-putr-blue-dark/30 flex items-center">
-                <div class="container mx-auto px-4 text-white">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-4 max-w-2xl leading-tight">Tata Ruang yang <span class="text-putr-yellow">Berkelanjutan</span></h2>
-                    <p class="text-lg mb-6 max-w-xl text-gray-200">Perencanaan wilayah yang terintegrasi, harmonis, dan ramah lingkungan untuk masa depan.</p>
-                    <a href="#" class="inline-block bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded hover:bg-white hover:text-putr-blue transition">Lihat Masterplan</a>
-                </div>
+            <div class="flex gap-3">
+                <a href="#" class="hover:text-putr-yellow transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-putr-yellow transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-putr-yellow transition"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </div>
 
+    <!-- HEADER & NAVBAR -->
+    <header
+        class="bg-white shadow-md sticky top-0 z-50 dark:bg-putr-blue dark:border-gray-700 transition-colors duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <!-- Ganti src dengan logo asli nanti -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Logo_Resmi_Provinsi_Jambi.png"
+                    alt="Logo Jambi" class="h-12 w-auto">
+                <div>
+                    <h1
+                        class="text-putr-blue font-bold text-lg leading-tight group-hover:text-putr-yellow-dark transition dark:text-white">
+                        DINAS PEKERJAAN UMUM<br>DAN TATA RUANG</h1>
+                    <p class="text-gray-500 text-xs dark:text-gray-400">PROVINSI JAMBI</p>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:flex gap-6 items-center">
+                <a href="#"
+                    class="font-medium text-putr-blue hover:text-putr-yellow-dark border-b-2 border-transparent hover:border-putr-yellow transition py-1 dark:text-white dark:hover:text-putr-yellow">Beranda</a>
+
+                <!-- DROPDOWN PROFIL START -->
+                <div class="relative group">
+                    <a href="#"
+                        class="font-medium text-putr-blue hover:text-putr-yellow-dark border-b-2 border-transparent hover:border-putr-yellow transition py-1 flex items-center gap-1 dark:text-white dark:hover:text-putr-yellow">
+                        Profil <i class="fas fa-chevron-down text-xs"></i>
+                    </a>
+
+                    <!-- Menu Dropdown (Hidden by default, Show on Hover) -->
+                    <div
+                        class="absolute top-full left-0 w-64 bg-white shadow-xl rounded-md overflow-hidden border-t-4 border-putr-yellow z-50 transform transition-all duration-200 ease-out opacity-0 pointer-events-none translate-y-1 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0 dark:bg-putr-blue dark:border-gray-700">
+                        <a href="#"
+                            class="block px-6 py-3 text-sm text-gray-700 hover:bg-putr-blue hover:text-white transition duration-200 flex items-center gap-2 dark:text-white dark:hover:bg-putr-blue-dark">
+                            <i class="fas fa-info-circle text-xs w-4"></i> Tentang Kami
+                        </a>
+                        <a href="#"
+                            class="block px-6 py-3 text-sm text-gray-700 hover:bg-putr-blue hover:text-white transition duration-200 flex items-center gap-2 dark:text-white dark:hover:bg-putr-blue-dark">
+                            <i class="fas fa-bullseye text-xs w-4"></i> Visi dan Misi
+                        </a>
+                        <a href="#"
+                            class="block px-6 py-3 text-sm text-gray-700 hover:bg-putr-blue hover:text-white transition duration-200 flex items-center gap-2 dark:text-white dark:hover:bg-putr-blue-dark">
+                            <i class="fas fa-sitemap text-xs w-4"></i> Struktur Organisasi
+                        </a>
+                        <a href="#"
+                            class="block px-6 py-3 text-sm text-gray-700 hover:bg-putr-blue hover:text-white transition duration-200 flex items-center gap-2 dark:text-white dark:hover:bg-putr-blue-dark">
+                            <i class="fas fa-tasks text-xs w-4"></i> Tugas Pokok dan Fungsi
+                        </a>
+                    </div>
+                </div>
+                <!-- DROPDOWN PROFIL END -->
+
+                <a href="#"
+                    class="font-medium text-putr-blue hover:text-putr-yellow-dark border-b-2 border-transparent hover:border-putr-yellow transition py-1 flex items-center gap-1 dark:text-white dark:hover:text-putr-yellow">Berita</a>
+                <a href="#"
+                    class="font-medium text-putr-blue hover:text-putr-yellow-dark border-b-2 border-transparent hover:border-putr-yellow transition py-1 flex items-center gap-1 dark:text-white dark:hover:text-putr-yellow">Layanan</a>
+                <a href="#"
+                    class="font-medium text-putr-blue hover:text-putr-yellow-dark border-b-2 border-transparent hover:border-putr-yellow transition py-1 flex items-center gap-1 dark:text-white dark:hover:text-putr-yellow">Dokumen</a>
+                <a href="#"
+                    class="font-medium text-putr-blue hover:text-putr-yellow-dark border-b-2 border-transparent hover:border-putr-yellow transition py-1 flex items-center gap-1 dark:text-white dark:hover:text-putr-yellow">Kontak</a>
+
+                <!-- Dark Mode Toggle Button -->
+                <button onclick="toggleDarkMode()"
+                    class="ml-2 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-putr-blue-dark dark:hover:bg-gray-900 transition text-putr-blue dark:text-putr-yellow border border-gray-200 dark:border-putr-yellow/50">
+                    <i class="fas fa-moon !block dark:!hidden"></i>
+                    <i class="fas fa-sun !hidden dark:!block"></i>
+                </button>
+            </nav>
+
+            <!-- Mobile Toggle -->
+            <button onclick="toggleMenu()"
+                class="lg:hidden text-putr-blue text-2xl focus:outline-none dark:text-putr-yellow">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Updated with Submenu) -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden bg-white border-t p-4 flex flex-col gap-2 shadow-lg dark:bg-putr-blue dark:border-gray-700">
+            <a href="#"
+                class="font-medium text-putr-blue py-2 border-b border-gray-100 dark:text-white dark:border-gray-700">Beranda</a>
+
+            <!-- Mobile Profil Submenu -->
+            <div class="pl-4 border-l-2 border-putr-yellow my-1">
+                <p class="text-xs font-bold text-gray-400 mb-2">Profil</p>
+                <a href="#"
+                    class="block text-sm text-gray-700 py-2 hover:text-putr-blue dark:text-gray-200 dark:hover:text-putr-yellow">Tentang
+                    Kami</a>
+                <a href="#"
+                    class="block text-sm text-gray-700 py-2 hover:text-putr-blue dark:text-gray-200 dark:hover:text-putr-yellow">Visi
+                    dan Misi</a>
+                <a href="#"
+                    class="block text-sm text-gray-700 py-2 hover:text-putr-blue dark:text-gray-200 dark:hover:text-putr-yellow">Struktur
+                    Organisasi</a>
+                <a href="#"
+                    class="block text-sm text-gray-700 py-2 hover:text-putr-blue dark:text-gray-200 dark:hover:text-putr-yellow">Tugas
+                    Pokok dan Fungsi</a>
+            </div>
+
+            <a href="#"
+                class="font-medium text-gray-600 py-2 border-b border-gray-100 dark:text-white dark:border-gray-700">Berita</a>
+            <a href="#"
+                class="font-medium text-gray-600 py-2 border-b border-gray-100 dark:text-white dark:border-gray-700">Layanan</a>
+            <a href="#"
+                class="font-medium text-gray-600 py-2 border-b border-gray-100 dark:text-white dark:border-gray-700">Dokumen</a>
+            <a href="#" class="font-medium text-gray-600 py-2 dark:text-white">Kontak</a>
+
+            <!-- Mobile Dark Mode Toggle -->
+            <div class="py-2 border-t border-gray-100 dark:border-gray-700 mt-2 flex items-center justify-between">
+                <span class="font-medium text-gray-600 dark:text-white">Mode Gelap</span>
+                <button onclick="toggleDarkMode()"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-putr-blue-dark text-putr-blue dark:text-putr-yellow border dark:border-putr-yellow/50">
+                    <i class="fas fa-moon !block dark:!hidden"></i>
+                    <i class="fas fa-sun !hidden dark:!block"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SLIDER -->
+    <div class="relative h-[400px] md:h-[550px] bg-black overflow-hidden">
+        <!-- Slide 1 -->
+        <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-100 active"
+            style="background-image: url('https://images.unsplash.com/photo-1590496793929-36417d3117de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-putr-blue-dark/90 to-putr-blue-dark/30 flex items-center">
+                <div class="container mx-auto px-4 text-white">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4 max-w-2xl leading-tight">Pembangunan Infrastruktur
+                        <span class="text-putr-yellow">Jambi</span></h2>
+                    <p class="text-lg mb-6 max-w-xl text-gray-200">Mewujudkan konektivitas wilayah yang merata demi
+                        kesejahteraan masyarakat Provinsi Jambi.</p>
+                    <a href="#"
+                        class="inline-block bg-putr-yellow text-putr-blue-dark font-bold py-3 px-8 rounded hover:bg-putr-yellow-dark transition shadow-lg">Pelajari
+                        Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0"
+            style="background-image: url('https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-putr-blue-dark/90 to-putr-blue-dark/30 flex items-center">
+                <div class="container mx-auto px-4 text-white">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4 max-w-2xl leading-tight">Tata Ruang yang <span
+                            class="text-putr-yellow">Berkelanjutan</span></h2>
+                    <p class="text-lg mb-6 max-w-xl text-gray-200">Perencanaan wilayah yang terintegrasi, harmonis, dan
+                        ramah lingkungan untuk masa depan.</p>
+                    <a href="#"
+                        class="inline-block bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded hover:bg-white hover:text-putr-blue transition">Lihat
+                        Masterplan</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- RUNNING TEXT (INFO) -->
     <div class="bg-white border-b-2 border-putr-yellow py-2">
@@ -36,8 +208,8 @@
             </div>
             <div class="whitespace-nowrap overflow-hidden w-full">
                 <div class="animate-marquee text-putr-blue-dark font-medium text-sm">
-                    Selamat Datang di Website Resmi Dinas PU-TR Provinsi Jambi &bull; Pengumuman Lelang Proyek Irigasi Tahap
-                    II telah dibuka &bull; Rapat Koordinasi Tata Ruang akan dilaksanakan Senin depan.
+                    Selamat Datang di Website Resmi Dinas PU-TR Provinsi Jambi &bull; Pengumuman Lelang Proyek Irigasi
+                    Tahap II telah dibuka &bull; Rapat Koordinasi Tata Ruang akan dilaksanakan Senin depan.
                 </div>
             </div>
         </div>
@@ -50,7 +222,8 @@
                 <!-- Service Item -->
                 <a href="#"
                     class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition text-center border-t-4 border-putr-yellow group dark:bg-putr-blue dark:border-gray-700">
-                    <div class="text-putr-blue text-4xl mb-3 group-hover:text-putr-yellow-dark transition dark:text-white">
+                    <div
+                        class="text-putr-blue text-4xl mb-3 group-hover:text-putr-yellow-dark transition dark:text-white">
                         <i class="fas fa-hard-hat"></i>
                     </div>
                     <h3 class="font-bold text-putr-blue-dark text-sm md:text-base dark:text-gray-200">LPSE & Lelang</h3>
@@ -58,7 +231,8 @@
                 <!-- Service Item -->
                 <a href="#"
                     class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition text-center border-t-4 border-putr-yellow group dark:bg-putr-blue dark:border-gray-700">
-                    <div class="text-putr-blue text-4xl mb-3 group-hover:text-putr-yellow-dark transition dark:text-white">
+                    <div
+                        class="text-putr-blue text-4xl mb-3 group-hover:text-putr-yellow-dark transition dark:text-white">
                         <i class="fas fa-file-contract"></i>
                     </div>
                     <h3 class="font-bold text-putr-blue-dark text-sm md:text-base dark:text-gray-200">Perizinan</h3>
@@ -66,7 +240,8 @@
                 <!-- Service Item -->
                 <a href="#"
                     class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition text-center border-t-4 border-putr-yellow group dark:bg-putr-blue dark:border-gray-700">
-                    <div class="text-putr-blue text-4xl mb-3 group-hover:text-putr-yellow-dark transition dark:text-white">
+                    <div
+                        class="text-putr-blue text-4xl mb-3 group-hover:text-putr-yellow-dark transition dark:text-white">
                         <i class="fas fa-bullhorn"></i>
                     </div>
                     <h3 class="font-bold text-putr-blue-dark text-sm md:text-base dark:text-gray-200">Pengaduan</h3>
@@ -74,7 +249,8 @@
                 <!-- Service Item -->
                 <a href="#"
                     class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition text-center border-t-4 border-putr-yellow group dark:bg-putr-blue dark:border-gray-700">
-                    <div class="text-putr-blue text-4xl mb-3 group-hover:text-putr-yellow-dark transition dark:text-white">
+                    <div
+                        class="text-putr-blue text-4xl mb-3 group-hover:text-putr-yellow-dark transition dark:text-white">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
                     <h3 class="font-bold text-putr-blue-dark text-sm md:text-base dark:text-gray-200">GIS & Peta</h3>
@@ -82,7 +258,8 @@
                 <!-- Service Item -->
                 <a href="#"
                     class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-1 transition text-center border-t-4 border-putr-yellow group dark:bg-putr-blue dark:border-gray-700">
-                    <div class="text-putr-blue text-4xl mb-3 group-hover:text-putr-yellow-dark transition dark:text-white">
+                    <div
+                        class="text-putr-blue text-4xl mb-3 group-hover:text-putr-yellow-dark transition dark:text-white">
                         <i class="fas fa-book-open"></i>
                     </div>
                     <h3 class="font-bold text-putr-blue-dark text-sm md:text-base dark:text-gray-200">Regulasi</h3>
@@ -97,8 +274,10 @@
 
             <!-- Left Column: News (2/3 width) -->
             <div class="w-full lg:w-2/3">
-                <div class="flex items-center justify-between mb-8 border-b-2 border-gray-100 pb-2 dark:border-gray-700">
-                    <h2 class="text-2xl font-bold text-putr-blue border-l-4 border-putr-yellow pl-3 dark:text-putr-yellow">
+                <div
+                    class="flex items-center justify-between mb-8 border-b-2 border-gray-100 pb-2 dark:border-gray-700">
+                    <h2
+                        class="text-2xl font-bold text-putr-blue border-l-4 border-putr-yellow pl-3 dark:text-putr-yellow">
                         Berita Terkini</h2>
                     <a href="#" class="text-sm text-putr-blue font-medium hover:underline">Lihat Semua &rarr;</a>
                 </div>
@@ -118,12 +297,10 @@
                             </div>
                             <h3
                                 class="text-lg font-bold text-putr-blue-dark mb-2 leading-snug group-hover:text-putr-yellow-dark transition dark:text-gray-100">
-                                <a href="{{ url('/berita/detail') }}">Pengecoran Jalan Lintas Timur Dilanjutkan Tahun
-                                    Ini</a>
-                            </h3>
+                                <a href="#">Pengecoran Jalan Lintas Timur Dilanjutkan Tahun Ini</a></h3>
                             <p class="text-gray-600 text-sm line-clamp-3 dark:text-gray-400">Pemerintah Provinsi Jambi
-                                melalui Dinas PU-TR memastikan pengecoran jalan sepanjang 15 KM akan selesai sebelum akhir
-                                tahun...</p>
+                                melalui Dinas PU-TR memastikan pengecoran jalan sepanjang 15 KM akan selesai sebelum
+                                akhir tahun...</p>
                         </div>
                     </div>
                     <!-- News Card 2 -->
@@ -140,9 +317,7 @@
                             </div>
                             <h3
                                 class="text-lg font-bold text-putr-blue-dark mb-2 leading-snug group-hover:text-putr-yellow-dark transition dark:text-gray-100">
-                                <a href="{{ url('/berita/detail') }}">Normalisasi Sungai Batanghari Masuk Tahap
-                                    Perencanaan</a>
-                            </h3>
+                                <a href="#">Normalisasi Sungai Batanghari Masuk Tahap Perencanaan</a></h3>
                             <p class="text-gray-600 text-sm line-clamp-3 dark:text-gray-400">Untuk mengantisipasi banjir
                                 tahunan, tim teknis sedang melakukan survei mendalam terhadap kondisi sedimentasi...</p>
                         </div>
@@ -161,12 +336,10 @@
                             </div>
                             <h3
                                 class="text-lg font-bold text-putr-blue-dark mb-2 leading-snug group-hover:text-putr-yellow-dark transition dark:text-gray-100">
-                                <a href="{{ url('/berita/detail') }}">Pengecoran Jalan Lintas Timur Dilanjutkan Tahun
-                                    Ini</a>
-                            </h3>
+                                <a href="#">Pengecoran Jalan Lintas Timur Dilanjutkan Tahun Ini</a></h3>
                             <p class="text-gray-600 text-sm line-clamp-3 dark:text-gray-400">Pemerintah Provinsi Jambi
-                                melalui Dinas PU-TR memastikan pengecoran jalan sepanjang 15 KM akan selesai sebelum akhir
-                                tahun...</p>
+                                melalui Dinas PU-TR memastikan pengecoran jalan sepanjang 15 KM akan selesai sebelum
+                                akhir tahun...</p>
                         </div>
                     </div>
                     <!-- News Card 4 -->
@@ -183,9 +356,7 @@
                             </div>
                             <h3
                                 class="text-lg font-bold text-putr-blue-dark mb-2 leading-snug group-hover:text-putr-yellow-dark transition dark:text-gray-100">
-                                <a href="{{ url('/berita/detail') }}">Normalisasi Sungai Batanghari Masuk Tahap
-                                    Perencanaan</a>
-                            </h3>
+                                <a href="#">Normalisasi Sungai Batanghari Masuk Tahap Perencanaan</a></h3>
                             <p class="text-gray-600 text-sm line-clamp-3 dark:text-gray-400">Untuk mengantisipasi banjir
                                 tahunan, tim teknis sedang melakukan survei mendalam terhadap kondisi sedimentasi...</p>
                         </div>
@@ -213,8 +384,8 @@
                                 <span class="block text-xs uppercase font-semibold text-gray-500">Okt</span>
                             </div>
                             <div>
-                                <h4 class="font-bold text-putr-blue-dark text-sm mb-1 dark:text-white">Rapat Evaluasi Fisik
-                                    Triwulan III</h4>
+                                <h4 class="font-bold text-putr-blue-dark text-sm mb-1 dark:text-white">Rapat Evaluasi
+                                    Fisik Triwulan III</h4>
                                 <p class="text-xs text-gray-500 dark:text-gray-300"><i
                                         class="far fa-clock text-putr-yellow mr-1"></i> 09:00 WIB</p>
                             </div>
@@ -358,21 +529,89 @@
             </div>
         </div>
     </section>
-@endsection
 
-@push('scripts')
+    <!-- FOOTER -->
+    <footer class="bg-putr-blue text-gray-300 pt-16 pb-6 dark:bg-putr-blue-dark dark:border-t dark:border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Logo_Resmi_Provinsi_Jambi.png"
+                            class="h-12 w-auto " alt="Logo Jambi">
+                        <h3 class="text-white font-bold text-lg">DPUTR PROVINSI JAMBI</h3>
+                    </div>
+                    <p class="text-sm leading-relaxed mb-4">Unsur pelaksana urusan pemerintahan bidang pekerjaan umum
+                        dan penataan ruang Provinsi Jambi.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="hover:text-putr-yellow"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-putr-yellow"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-putr-yellow"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-putr-yellow"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Link -->
+                <div>
+                    <h4 class="text-putr-yellow font-bold uppercase text-sm tracking-wider mb-6">Navigasi</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white hover:pl-2 transition">Beranda</a></li>
+                        <li><a href="#" class="hover:text-white hover:pl-2 transition">Profil Dinas</a></li>
+                        <li><a href="#" class="hover:text-white hover:pl-2 transition">Berita</a></li>
+                        <li><a href="#" class="hover:text-white hover:pl-2 transition">Layanan Publik</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="lg:col-span-2">
+                    <h4 class="text-putr-yellow font-bold uppercase text-sm tracking-wider mb-6">Hubungi Kami</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex gap-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-putr-yellow"></i>
+                            <span>Komp. Kantor Gubernur Jambi, Jl. Jend. A. Yani No.10, Telanaipura, Kota Jambi,
+                                Jambi</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i class="fas fa-phone mt-1 text-putr-yellow"></i>
+                            <span>(0741) 123456</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i class="fas fa-envelope mt-1 text-putr-yellow"></i>
+                            <span>putr@jambiprov.go.id</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6 h-32 bg-gray-700 rounded flex items-center justify-center text-gray-500">
+                        <!-- Placeholder for Google Maps -->
+                        <i class="fas fa-map mr-2"></i> Google Maps Embed Area
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-6 text-center text-xs">
+                &copy; 2023 Dinas Pekerjaan Umum dan Tata Ruang Provinsi Jambi. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script -->
     <script>
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
         // Simple Slider Logic
         let currentSlide = 0;
         const slides = document.querySelectorAll('.hero-slide');
-        
+
         function nextSlide() {
             slides[currentSlide].classList.remove('opacity-100');
             slides[currentSlide].classList.add('opacity-0');
             slides[currentSlide].classList.remove('active');
-            
+
             currentSlide = (currentSlide + 1) % slides.length;
-            
+
             slides[currentSlide].classList.remove('opacity-0');
             slides[currentSlide].classList.add('opacity-100');
             slides[currentSlide].classList.add('active');
@@ -380,4 +619,6 @@
 
         setInterval(nextSlide, 5000);
     </script>
-@endpush
+</body>
+
+</html>

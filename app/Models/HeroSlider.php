@@ -8,11 +8,12 @@ class HeroSlider extends Model
 {
     protected $fillable = [
         'title',
+        'title_2',
         'subtitle',
         'image',
         'link',
         'button_text',
-        'order',    
+        'order',
         'is_active',
     ];
 
